@@ -83,19 +83,15 @@ def move():
     #the 4 direction we can go
 
     left_x = my_position_x[0] - 1
-    print("left is ", left_x)
 
     right_x = my_position_x[0] + 1
-    print("right is", right_x)
 
     down_y = my_position_y[0] + 1
 
     up_y = my_position_y[0] - 1
 
-    print("up is ", up_y)
-    print("down is", down_y)
 
-    # Truth value of four direction
+    # Truth value of four direction is true by default
 
     is_left = True
     is_right = True
@@ -149,7 +145,10 @@ def move():
     if is_down:
         directions.append('down')
 
-    direction = random.choice(directions)
+    if is_right == False and is_left == False and is_up == False and is_down == False:
+        direction = down
+    else:
+        direction = random.choice(directions)
 
     print("Final decision", direction)
 
