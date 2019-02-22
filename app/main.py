@@ -4,6 +4,8 @@ import random
 import bottle
 
 from api import ping_response, start_response, move_response, end_response
+from typing import Any
+
 
 @bottle.route('/')
 def index():
@@ -17,7 +19,6 @@ def static(path):
     """
     Given a path, return the static file located relative
     to the static folder.
-
     This can be used to return the snake head URL in an API response.
     """
     return bottle.static_file(path, root='static/')
@@ -54,11 +55,103 @@ def move():
     TODO: Using the data from the endpoint request object, your
             snake AI must choose a direction to move in.
     """
+    print("\n\n\nMove \n")
     print(json.dumps(data))
+    json_string = json.dumps(data)
+    game_data = json.loads(json_string)
+    height = game_data["board"]["height"]
+    width = game_data["board"]["width"]
 
-    directions = ['up', 'down', 'left', 'right']
-    #direction = up
+    # to get my position
+    my_position_x = []
+    my_position_y = []
+    my_length = 0
+
+
+    for i in range(0, len(game_data["you"]["body"])):
+        my_position_x.append(int(game_data["you"]["body"][i]["x"]))
+        my_position_y.append(int(game_data["you"]["body"][i]["y"]))
+        my_length+=1
+
+
+    print("x =", my_position_x[0])
+    print("y = ", my_position_y[0])
+    print("height =", height)
+    print("width =", width)
+    print("length = ", my_length)
+
+    #the 4 direction we can go
+
+    left_x = my_position_x[0] - 1
+    print("left is ", left_x)
+
+    right_x = my_position_x[0] + 1
+    print("right is", right_x)
+
+    down_y = my_position_y[0] + 1
+
+    up_y = my_position_y[0] - 1
+
+    print("up is ", up_y)
+    print("down is", down_y)
+
+    # Truth value of four direction
+
+    is_left = True
+    is_right = True
+    is_up = True
+    is_down = True
+
+
+    # Determine if its close to the wall
+
+    is_left = (my_position_x[0] != 0)
+
+    is_right = (my_position_x[0] != (width - 1))
+
+    is_up = (my_position_y[0] != 0)
+
+    is_down = (my_position_y[0] != (height - 1))
+
+    # Determine if its close to own body
+
+    for i in range(1, my_length - 1):
+        if my_position_x[i] == my_position_x[0] and my_position_y[i] == up_y:
+               is_up = False
+
+        if my_position_x[i] == my_position_x[0] and my_position_y[i] == down_y :
+                is_down = False
+
+        if my_position_x[i] == left_x and my_position_y[0] == my_position_y[i]:
+                is_left = False
+
+        if my_position_x[i] == right_x and my_position_y[0] == my_position_y[i]:
+                is_right = False
+
+    directions = []
+
+    print("right", is_right)
+    print("left", is_left)
+    print("up", is_up)
+    print("down", is_down)
+
+    #now that we know which direction we "cannot" go, let's find which direction we favor
+
+    if is_right:
+        directions.append('right')
+
+    if is_left:
+        directions.append('left')
+
+    if is_up:
+        directions.append('up')
+
+    if is_down:
+        directions.append('down')
+
     direction = random.choice(directions)
+
+    print("Final decision", direction)
 
     return move_response(direction)
 
