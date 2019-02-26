@@ -124,6 +124,12 @@ def move():
         if my_position_x[i] == right_x and my_position_y[0] == my_position_y[i]:
                 is_right = False
 
+
+    #Make a list of enemy snakes' heads (since we can kill them if their body length is shorter)
+
+    #Make a list of enemy snakes' bodies
+
+
     directions = []
 
     print("right", is_right)
@@ -146,7 +152,7 @@ def move():
         directions.append('down')
 
     if is_right == False and is_left == False and is_up == False and is_down == False:
-        direction = down
+        direction = 'down'
     else:
         direction = random.choice(directions)
 
