@@ -51,6 +51,7 @@ def start():
 def move():
     data = bottle.request.json
 
+    print("heroku testing")
     """
     TODO: Using the data from the endpoint request object, your
             snake AI must choose a direction to move in.
