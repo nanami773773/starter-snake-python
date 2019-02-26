@@ -4,7 +4,7 @@ import random
 import bottle
 
 from api import ping_response, start_response, move_response, end_response
-from typing import Any
+# from typing import Any
 
 
 @bottle.route('/')
