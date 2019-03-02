@@ -447,7 +447,8 @@ def move():
                             # direction = "down"
                             safer.append("down")
             else:
-                direction = random.choice(safe)
+                # direction = random.choice(safe)
+                safer = safe
         elif "up" not in safe and "down" not in safe:
             print("check right/left case")
             if right[0] in mybody_x and left[0] not in mybody_x:
