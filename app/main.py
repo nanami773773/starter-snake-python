@@ -43,8 +43,10 @@ def start():
     print(json.dumps(data))
 
     color = "#E18F9B"
+    headTpye = "pixel"
+    tailType = "pixel"
 
-    return start_response(color)
+    return start_response(color, headTpye, tailType)
 
 
 @bottle.post('/move')
@@ -73,6 +75,38 @@ def move():
         my_position_x.append(int(game_data["you"]["body"][i]["x"]))
         my_position_y.append(int(game_data["you"]["body"][i]["y"]))
         my_length+=1
+
+    distinctsnakexy = []
+    snakexy = []
+    snakehead = []
+    snake_num = 0
+    snake_len = []
+
+    for snake in game_data['board']['snakes']:
+        onesnakexy = []  # one snake's body
+        snake_num += 1
+        onesnake = 0
+        for coords in snake['body']:
+            onesnakexy.append(list(coords.values()))  # append each coords of snake's body to that particular snake
+            snakexy.append(list(coords.values()))  # append each coords of snake's body to that particular snake
+            onesnake += 1
+        distinctsnakexy.append(onesnakexy)
+        snake_len.append(onesnake)
+        # append all snakes body to an array of snake bodies (eachcoords array in onesnakebody array in allsnake
+        # array) (3dArray)
+        snakehead.append(list(snake['body'][0].values()))
+    # append all snakes head coordinates to an array of snake heads (eachcoordsofhead array in allsnakearray) (2dArray)
+
+    myhead = list(game_data['you']['body'][0].values())
+
+    print("snakexy\n" + "===========\n" + str(snakexy) + "\n")
+
+    for i in range(0, snake_num -1):
+        print("each snake length: " + snake_len[i] + "\n")
+    # testing how the enemy snake things working
+    enemy_position_close = []
+
+    # Make a list of enemy snakes' bodies
 
 
     print("x =", my_position_x[0])
@@ -126,10 +160,24 @@ def move():
                 is_right = False
 
 
-    #Make a list of enemy snakes' heads (since we can kill them if their body length is shorter)
+    #Determine if its close to enemy's body
 
-    #Make a list of enemy snakes' bodies
+    right = [myhead[0] + 1, myhead[1]]
+    left = [myhead[0] - 1, myhead[1]]
+    down = [myhead[0], myhead[1] + 1]
+    up = [myhead[0], myhead[1] - 1]
 
+    if right in snakexy:
+        is_right = False
+
+    if left in snakexy:
+        is_left = False
+
+    if down in snakexy:
+        is_down = False
+
+    if up in snakexy:
+        is_up = False
 
     directions = []
 
@@ -138,7 +186,7 @@ def move():
     print("up", is_up)
     print("down", is_down)
 
-    #now that we know which direction we "cannot" go, let's find which direction we favor
+    #now let's see who is the closest snake to us
 
     if is_right:
         directions.append('right')
