@@ -512,7 +512,7 @@ def move():
 
     go_food = True
 
-    for i in range(0, len(snakelength)):
+    for i in range(0, len(snakelength) - 1):
         if len(my_position_x) < snakelength[i]:
             go_food = True
 
