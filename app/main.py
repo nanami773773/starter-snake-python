@@ -69,13 +69,12 @@ def move():
     my_position_x = []
     my_position_y = []
     my_length = 0
+
+
     for i in range(0, len(game_data["you"]["body"])):
         my_position_x.append(int(game_data["you"]["body"][i]["x"]))
         my_position_y.append(int(game_data["you"]["body"][i]["y"]))
         my_length+=1
-
-
-    # Getting all the coordinates
 
     distinctsnakexy = []
     snakexy = []
@@ -97,12 +96,15 @@ def move():
         snakehead_x.append(int(snake['body'][0]["x"]))
         snakehead_y.append(int(snake['body'][0]["y"]))
 
+    # append all snakes head coordinates to an array of snake heads (eachcoordsofhead array in allsnakearray) (2dArray)
+
     myhead = list(game_data['you']['body'][0].values())
 
     print("Snake: ",  snake_num)
 
     for i in range(0, snake_num -1):
         print("\neach snake length: " + str(snake_len[i]) + "\n")
+
 
     print("x =", my_position_x[0])
     print("y = ", my_position_y[0])
@@ -179,66 +181,73 @@ def move():
 
     distance_min = []
 
-    # Check for each direction
+    # Check for right
 
     for i in range(0, snake_num - 1):
-        if is_right == False:
-            distance_min.append(99999999)
-            break
         x = snakehead_x[i] - right_x
         y = snakehead_y[i] - my_position_y[0]
         distance = x*x + y*y
-        if len(distance_min)==0:
+        if is_right == False:
+            distance_min.append(99999999)
+            break
+        elif len(distance_min)==0:
             distance_min.append(distance)
         else:
             if distance_min[0] > distance:
                 distance_min.pop()
                 distance_min.append(distance)
 
+    print("Distance Right", distance_min[0])
 
     for i in range(0, snake_num - 1):
-        if is_left == False:
-            distance_min.append(99999999)
-            break
         x = snakehead_x[i] - left_x
         y = snakehead_y[i] - my_position_y[0]
         distance = x*x + y*y
-        if len(distance_min) == 1:
+        if is_left == False:
+            distance_min.append(99999999)
+            break
+        elif len(distance_min) < 2:
             distance_min.append(distance)
         else:
             if distance_min[1] > distance:
                 distance_min.pop()
                 distance_min.append(distance)
 
+    print("Distance Left", distance_min[1])
+
     for i in range(0, snake_num - 1):
-        if is_down == False:
-            distance_min.append(99999999)
-            break
         x = snakehead_x[i] - my_position_x[0]
         y = snakehead_y[i] - down_y
         distance = x * x + y * y
-        if len(distance_min) == 2:
+        if is_down == False:
+            distance_min.append(99999999)
+            break
+        elif len(distance_min) < 3:
             distance_min.append(distance)
         else:
             if distance_min[2] > distance:
                 distance_min.pop()
                 distance_min.append(distance)
 
+    print("Distance Down", distance_min[2])
+
     for i in range(0, snake_num - 1):
-        if is_up == False:
-            distance_min.append(99999999)
-            break
         x = snakehead_x[i] - my_position_x[0]
         y = snakehead_y[i] - up_y
         distance = x * x + y * y
-        if len(distance_min) == 3:
+        if is_up == False:
+            distance_min.append(99999999)
+            break
+        elif len(distance_min) < 4:
             distance_min.append(distance)
         else:
             if distance_min[3] > distance:
                 distance_min.pop()
                 distance_min.append(distance)
 
-    dir = 1
+    print("Distance Up", distance_min[3])
+
+    dir = 0
 
     for i in range(0 , 3):
         if distance_min[i] == min(distance_min):
@@ -253,17 +262,17 @@ def move():
         print("\nSnakeHeadsY: " + str(snakehead_y[i]))
 
 
-    if dir == 1:
+    if dir == 0:
         direction = 'right'
 
-    if dir == 2:
+    if dir == 1:
         direction = 'left'
+
+    if dir == 2:
+        direction = 'down'
 
     if dir == 3:
         direction = 'up'
-
-    if dir == 4:
-        direction = 'down'
 
 
     print("Final decision", direction)
