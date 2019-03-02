@@ -182,13 +182,13 @@ def move():
     # Check for each direction
 
     for i in range(0, snake_num - 1):
-        x = snakehead_x[i] - right_x
-        y = snakehead_y[i] - my_position_y[0]
-        distance = x*x + y*y
         if is_right == False:
             distance_min.append(99999999)
             break
-        elif len(distance_min)==0:
+        x = snakehead_x[i] - right_x
+        y = snakehead_y[i] - my_position_y[0]
+        distance = x*x + y*y
+        if len(distance_min)==0:
             distance_min.append(distance)
         else:
             if distance_min[0] > distance:
@@ -197,13 +197,13 @@ def move():
 
 
     for i in range(0, snake_num - 1):
-        x = snakehead_x[i] - left_x
-        y = snakehead_y[i] - my_position_y[0]
-        distance = x*x + y*y
         if is_left == False:
             distance_min.append(99999999)
             break
-        elif len(distance_min) < 2:
+        x = snakehead_x[i] - left_x
+        y = snakehead_y[i] - my_position_y[0]
+        distance = x*x + y*y
+        if len(distance_min) == 1:
             distance_min.append(distance)
         else:
             if distance_min[1] > distance:
@@ -211,13 +211,13 @@ def move():
                 distance_min.append(distance)
 
     for i in range(0, snake_num - 1):
-        x = snakehead_x[i] - my_position_x[0]
-        y = snakehead_y[i] - down_y
-        distance = x * x + y * y
         if is_down == False:
             distance_min.append(99999999)
             break
-        elif len(distance_min) < 3:
+        x = snakehead_x[i] - my_position_x[0]
+        y = snakehead_y[i] - down_y
+        distance = x * x + y * y
+        if len(distance_min) == 2:
             distance_min.append(distance)
         else:
             if distance_min[2] > distance:
@@ -225,27 +225,26 @@ def move():
                 distance_min.append(distance)
 
     for i in range(0, snake_num - 1):
-        x = snakehead_x[i] - my_position_x[0]
-        y = snakehead_y[i] - up_y
-        distance = x * x + y * y
         if is_up == False:
             distance_min.append(99999999)
             break
-        elif len(distance_min) < 4:
+        x = snakehead_x[i] - my_position_x[0]
+        y = snakehead_y[i] - up_y
+        distance = x * x + y * y
+        if len(distance_min) == 3:
             distance_min.append(distance)
         else:
             if distance_min[3] > distance:
                 distance_min.pop()
                 distance_min.append(distance)
 
-    dir = 0
+    dir = 1
 
     for i in range(0 , 3):
         if distance_min[i] == min(distance_min):
             break
-        dir += 1
-
-
+        else:
+            dir += 1
 
     for i in range(0, snake_num - 1):
         print("\nSnakeHeadsX: " + str(snakehead_x[i]))
@@ -254,17 +253,17 @@ def move():
         print("\nSnakeHeadsY: " + str(snakehead_y[i]))
 
 
-    if dir == 0:
+    if dir == 1:
         direction = 'right'
 
-    if dir == 1:
+    if dir == 2:
         direction = 'left'
 
-    if dir == 2:
+    if dir == 3:
         direction = 'up'
 
-    if dir == 3:
-        directions = 'down'
+    if dir == 4:
+        direction = 'down'
 
 
     print("Final decision", direction)
