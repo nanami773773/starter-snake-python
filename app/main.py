@@ -82,6 +82,16 @@ def move():
     snakehead_y = []
     snake_num = 0
     snake_len = []
+    food_x = []
+    food_y = []
+
+    for i in range (0, len(game_data["board"]["food"])):
+        food_x.append(int(game_data["board"]["food"][i]["x"]))
+        food_y.append(int(game_data["board"]["food"][i]["y"]))
+
+    for i in range(0, len(game_data["board"]["food"])):
+        print(food_x[i], " ")
+        print(food_y[i], " ")
 
     for snake in game_data['board']['snakes']:
         onesnakexy = []  # one snake's body
@@ -183,9 +193,9 @@ def move():
 
     # Check for right
 
-    for i in range(0, snake_num - 1):
-        x = snakehead_x[i] - right_x
-        y = snakehead_y[i] - my_position_y[0]
+    for i in range (0, len(game_data["board"]["food"])):
+        x = food_x[i] - right_x
+        y = food_y[i] - my_position_y[0]
         distance = x**2 + y**2
         if is_right == False:
             distance_min.append(99999999)
@@ -199,9 +209,9 @@ def move():
 
 #    print("Distance Right", distance_min[0])
 
-    for i in range(0, snake_num - 1):
-        x = snakehead_x[i] - left_x
-        y = snakehead_y[i] - my_position_y[0]
+    for i in range (0, len(game_data["board"]["food"])):
+        x = food_x[i] - left_x
+        y = food_y[i] - my_position_y[0]
         distance = x**2 + y**2
         if is_left == False:
             distance_min.append(99999999)
@@ -215,9 +225,9 @@ def move():
 
  #   print("Distance Left", distance_min[1])
 
-    for i in range(0, snake_num - 1):
-        x = snakehead_x[i] - my_position_x[0]
-        y = snakehead_y[i] - down_y
+    for i in range (0, len(game_data["board"]["food"])):
+        x = food_x[i] - my_position_x[0]
+        y = food_y[i] - down_y
         distance = x**2 + y**2
         if is_down == False:
             distance_min.append(99999999)
@@ -231,9 +241,9 @@ def move():
 
   #  print("Distance Down", distance_min[2])
 
-    for i in range(0, snake_num - 1):
-        x = snakehead_x[i] - my_position_x[0]
-        y = snakehead_y[i] - up_y
+    for i in range (0, len(game_data["board"]["food"])):
+        x = food_x[i] - my_position_x[0]
+        y = food_y[i] - up_y
         distance = x**2 + y**2
         if is_up == False:
             distance_min.append(99999999)
