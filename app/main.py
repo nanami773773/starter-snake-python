@@ -514,7 +514,7 @@ def move():
 
     for i in range(0, len(snakelength) - 1):
         if len(my_position_x) > (snakelength[i] + 1):
-            go_food = True
+            go_food = False
 
     # the 4 direction we can go
     left_x = my_position_x[0] - 1
@@ -585,51 +585,71 @@ def move():
 
     # Fix everything below later.
 
+    righty = []
+    lefty = []
+    downy = []
+    upy = []
+
+    right_p = 0
+    left_p = 0
+    down_p = 0
+    up_p = 0
+
     if go_food == False:
         # Check for right
         if "right" in safer:
-            distance_min = 9999999999
-            for i in range(0, len(snakelength)):
-                x = snakehead_x[i] - right_x
-                y = snakehead_y[i] - my_position_y[0]
-                distance = x ** 2 + y ** 2
-                if distance_min > distance:
-                    distance_min = distance
-            min_dist_dict["right"] = distance_min
+            for i in range((width - 1)/2, width - 1):
+                for j in range(0, (height - 1)):
+                    righty.append[i , j]
+
+            for i in range((width - 1) / 2, width - 1):
+                for j in range(0, (height - 1)):
+                    if snakexy in righty:
+                        right_p += 1
+
+            min_dist_dict["right"] = right_p
 
         #		 print("Distance Right", distance_min[0])
 
         if "left" in safer:
-            distance_min = 9999999999
-            for i in range(0, len(food_x)):
-                x = snakehead_x[i] - left_x
-                y = snakehead_y[i] - my_position_y[0]
-                distance = x ** 2 + y ** 2
-                if distance_min > distance:
-                    distance_min = distance
-            min_dist_dict["left"] = distance_min
+            for i in range(0, ((width - 1) / 2) - 1):
+                for j in range(0, (height - 1)):
+                    lefty.append[i, j]
+
+            for i in range(0, ((width - 1) / 2) - 1):
+                for j in range(0, (height - 1)):
+
+                    if snakexy in lefty:
+                        left_p += 1
+
+            min_dist_dict["left"] = left_p
         #	 print("Distance Left", distance_min[1])
 
         if "down" in safer:
-            distance_min = 9999999999
-            for i in range(0, len(food_x)):
-                x = snakehead_x[i] - my_position_x[0]
-                y = snakehead_y[i] - down_y
-                distance = x ** 2 + y ** 2
-                if distance_min > distance:
-                    distance_min = distance
-            min_dist_dict["down"] = distance_min
+            for i in range(0, width - 1):
+                for j in range((height - 1)/ 2, height - 1):
+                    downy.append[i, j]
+
+            for i in range(0, width - 1):
+                for j in range((height - 1) / 2, height - 1):
+
+                    if snakexy in downy:
+                        down_p += 1
+
+            min_dist_dict["down"] = down_p
         #	 print("Distance Down", distance_min[2])
 
         if "up" in safer:
-            distance_min = 9999999999
-            for i in range(0, len(food_x)):
-                x = snakehead_x[i] - my_position_x[0]
-                y = snakehead_y[i] - up_y
-                distance = x ** 2 + y ** 2
-                if distance_min > distance:
-                    distance_min = distance
-            min_dist_dict["up"] = distance_min
+            for i in range(0, width - 1):
+                for j in range(0, (height - 1) / 2 - 1):
+                    upy.append[i, j]
+
+            for i in range(0, width - 1):
+                for j in range(0, (height - 1) / 2 - 1):
+                    if snakexy in upy:
+                        up_p += 1
+
+            min_dist_dict["up"] = up_p
         #	 print("Distance Up", distance_min[3])
 
         # dir = 0
