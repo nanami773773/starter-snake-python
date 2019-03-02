@@ -156,7 +156,7 @@ def move():
         if my_position_x[i] == right_x and my_position_y[0] == my_position_y[i]:
                 is_right = False
 
-
+    print("I am here 1")
     #Determine if its close to enemy's body
 
     right = [myhead[0] + 1, myhead[1]]
@@ -176,7 +176,7 @@ def move():
     if up in snakexy:
         is_up = False
 
-
+    print("i am here 2")
     #now let's see who is the closest snake to us
 
     distance_min = []
