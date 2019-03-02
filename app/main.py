@@ -69,12 +69,13 @@ def move():
     my_position_x = []
     my_position_y = []
     my_length = 0
-
-
     for i in range(0, len(game_data["you"]["body"])):
         my_position_x.append(int(game_data["you"]["body"][i]["x"]))
         my_position_y.append(int(game_data["you"]["body"][i]["y"]))
         my_length+=1
+
+
+    # Getting all the coordinates
 
     distinctsnakexy = []
     snakexy = []
@@ -96,15 +97,12 @@ def move():
         snakehead_x.append(int(snake['body'][0]["x"]))
         snakehead_y.append(int(snake['body'][0]["y"]))
 
-    # append all snakes head coordinates to an array of snake heads (eachcoordsofhead array in allsnakearray) (2dArray)
-
     myhead = list(game_data['you']['body'][0].values())
 
     print("Snake: ",  snake_num)
 
     for i in range(0, snake_num -1):
         print("\neach snake length: " + str(snake_len[i]) + "\n")
-
 
     print("x =", my_position_x[0])
     print("y = ", my_position_y[0])
@@ -181,7 +179,7 @@ def move():
 
     distance_min = []
 
-    # Check for right
+    # Check for each direction
 
     for i in range(0, snake_num - 1):
         x = snakehead_x[i] - right_x
@@ -245,8 +243,7 @@ def move():
     for i in range(0 , 3):
         if distance_min[i] == min(distance_min):
             break
-        else:
-            dir += 1
+        dir += 1
 
 
 
