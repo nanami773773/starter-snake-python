@@ -512,8 +512,8 @@ def move():
 
     go_food = True
 
-    for i in range(0, len(snakelength) - 1):
-        if len(my_position_x) > (snakelength[i] + 1):
+    for i in range(0, len(snakelength)):
+        if len(my_position_x) > (snakelength[i]):
             go_food = False
 
     # the 4 direction we can go
@@ -598,11 +598,12 @@ def move():
     if go_food == False:
         # Check for right
         if "right" in safer:
-            for i in range((width - 1)/2, width - 1):
+            for i in range((int(width - 1)/2), int(width - 1)):
                 for j in range(0, (height - 1)):
-                    righty.append[i , j]
+                    x = [i , j]
+                    righty.append(x)
 
-            for i in range((width - 1) / 2, width - 1):
+            for i in range((int(width - 1) / 2), int(width - 1)):
                 for j in range(0, (height - 1)):
                     if snakexy in righty:
                         right_p += 1
@@ -612,12 +613,13 @@ def move():
         #		 print("Distance Right", distance_min[0])
 
         if "left" in safer:
-            for i in range(0, ((width - 1) / 2) - 1):
-                for j in range(0, (height - 1)):
-                    lefty.append[i, j]
+            for i in range(0, (int((width - 1) / 2)) - 1):
+                for j in range(0, int(height - 1)):
+                    x = [i, j]
+                    lefty.append(x)
 
-            for i in range(0, ((width - 1) / 2) - 1):
-                for j in range(0, (height - 1)):
+            for i in range(0, int(((width - 1) / 2)) - 1):
+                for j in range(0, int(height - 1)):
 
                     if snakexy in lefty:
                         left_p += 1
@@ -626,12 +628,13 @@ def move():
         #	 print("Distance Left", distance_min[1])
 
         if "down" in safer:
-            for i in range(0, width - 1):
-                for j in range((height - 1)/ 2, height - 1):
-                    downy.append[i, j]
+            for i in range(0, int(width - 1)):
+                for j in range(int((height - 1)/ 2), int(height - 1)):
+                    x = [i, j]
+                    downy.append(x)
 
             for i in range(0, width - 1):
-                for j in range((height - 1) / 2, height - 1):
+                for j in range(int((height - 1) / 2), int(height - 1)):
 
                     if snakexy in downy:
                         down_p += 1
@@ -640,12 +643,13 @@ def move():
         #	 print("Distance Down", distance_min[2])
 
         if "up" in safer:
-            for i in range(0, width - 1):
-                for j in range(0, (height - 1) / 2 - 1):
-                    upy.append[i, j]
+            for i in range(0, int(width - 1)):
+                for j in range(0, int((height - 1) / 2 - 1)):
+                    x = [i, j]
+                    upy.append(x)
 
             for i in range(0, width - 1):
-                for j in range(0, (height - 1) / 2 - 1):
+                for j in range(0, int((height - 1) / 2 - 1)):
                     if snakexy in upy:
                         up_p += 1
 
@@ -659,6 +663,11 @@ def move():
         # dir = i
 
         direction = min(min_dist_dict, key=min_dist_dict.get)
+
+
+    print("Safe: ", safer)
+
+    print("Direction: ", direction)
 
     return move_response(direction)
 
