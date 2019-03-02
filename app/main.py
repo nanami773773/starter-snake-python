@@ -186,7 +186,7 @@ def move():
     for i in range(0, snake_num - 1):
         x = snakehead_x[i] - right_x
         y = snakehead_y[i] - my_position_y[0]
-        distance = x*x + y*y
+        distance = x**2 + y**2
         if is_right == False:
             distance_min.append(99999999)
             break
@@ -197,12 +197,12 @@ def move():
                 distance_min.pop()
                 distance_min.append(distance)
 
-    #print("Distance Right", distance_min[0])
+    print("Distance Right", distance_min[0])
 
     for i in range(0, snake_num - 1):
         x = snakehead_x[i] - left_x
         y = snakehead_y[i] - my_position_y[0]
-        distance = x*x + y*y
+        distance = x**2 + y**2
         if is_left == False:
             distance_min.append(99999999)
             break
@@ -213,12 +213,12 @@ def move():
                 distance_min.pop()
                 distance_min.append(distance)
 
-    #print("Distance Left", distance_min[1])
+    print("Distance Left", distance_min[1])
 
     for i in range(0, snake_num - 1):
         x = snakehead_x[i] - my_position_x[0]
         y = snakehead_y[i] - down_y
-        distance = x * x + y * y
+        distance = x**2 + y**2
         if is_down == False:
             distance_min.append(99999999)
             break
@@ -229,12 +229,12 @@ def move():
                 distance_min.pop()
                 distance_min.append(distance)
 
-    #print("Distance Down", distance_min[2])
+    print("Distance Down", distance_min[2])
 
     for i in range(0, snake_num - 1):
         x = snakehead_x[i] - my_position_x[0]
         y = snakehead_y[i] - up_y
-        distance = x * x + y * y
+        distance = x**2 + y**2
         if is_up == False:
             distance_min.append(99999999)
             break
@@ -245,9 +245,8 @@ def move():
                 distance_min.pop()
                 distance_min.append(distance)
 
-    #print("Distance Up", distance_min[3])
+    print("Distance Up", distance_min[3])
 
-    print(*distance_min, sep='\n')
 
     dir = 0
 
