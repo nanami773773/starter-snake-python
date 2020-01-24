@@ -50,7 +50,7 @@ def start():
 
     color = "#ff0000"
     headType = "silly"
-    tailType = "freckled"
+    tailType = "bwc-ice-skate"
 
     return start_response(color, headType, tailType)
 
