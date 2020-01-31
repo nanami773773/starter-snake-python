@@ -431,24 +431,21 @@ def move():
     min_dist_dict = {}
 
     #Tail position
-    tail_x = 5
-        #my_position_x[mylength-1]
-    tail_y = 7
-        #my_position_y[mylength-1]
+    tail_x = my_position_x[mylength-1]
+    tail_y = my_position_y[mylength-1]
 
     # Check for right
     if "right" in safer:
             x = tail_x - right_x
             y = tail_y - my_position_y[0]
             distance = x ** 2 + y ** 2
-        min_dist_dict["right"] = distance
+            min_dist_dict["right"] = distance
 
     if "left" in safer:
             x = tail_x - left_x
             y = tail_y - my_position_y[0]
             distance = x ** 2 + y ** 2
-
-        min_dist_dict["left"] = distance
+            min_dist_dict["left"] = distance
 
     if "down" in safer:
             x = tail_x - my_position_x[0]
