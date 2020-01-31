@@ -431,8 +431,10 @@ def move():
     min_dist_dict = {}
 
     #Tail position
-    tail_x = my_position_x[mylength]
-    tail_y = my_position_y[mylength]
+    tail_x = 5
+        #my_position_x[mylength-1]
+    tail_y = 7
+        #my_position_y[mylength-1]
 
     # Check for right
     if "right" in safer:
@@ -460,11 +462,6 @@ def move():
             distance = x ** 2 + y ** 2
             min_dist_dict["up"] = distance
 
-    # dir = 0
-
-    # for i in range(0 , 3):
-    # if distance_min[i] == min(distance_min):
-    # dir = i
 
     direction = min(min_dist_dict, key=min_dist_dict.get)
     print("direction\n" + "===========\n" + str(direction) + "\n")
